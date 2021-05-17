@@ -3,6 +3,8 @@ function sudo {Start-Process wt -Verb runAs}
 function lab {cd "C:\Users\azraf\Codes"}
 function gitlab {cd "C:\Users\azraf\Codes\Flutter\Github"}
 function bitlab {cd "C:\Users\azraf\Codes\Flutter\BitBucket"}
+#Flutter Run Device
+function runC {flutter run -d chrome}
 
 function Print-Text {
     param(
@@ -20,8 +22,8 @@ function pedit {
 function gitme {
 	git init
 	git add .
-	git commit -m "First Commit"
-	git log
+	git commit
+	git log --oneline
 	}
 	
 #Git-New-Commit and Push
@@ -32,7 +34,21 @@ function git-new-commit {
     
 	git add .
 	git commit -m $Text
-	git log
+	git push -u
+	git log --oneline
+
+}
+
+#Git-New-Tag and Push
+function git-tag {
+    param(
+      	[String] $Version,
+		[String] $Text
+    )
+	git tag -a v$Version -m $Text
+	git show v$Version
+	git push origin --tags
+	git log --oneline
 
 }
 
@@ -48,7 +64,7 @@ function flt-git {
 	git init
 	git add .
 	git commit -m "First Commit"
-	git log
+	git log --oneline
 	cd ..
 	code $Text
 	cd $Text
@@ -67,8 +83,8 @@ function flt-bit-new {
 	git add .
 	git commit -m "First Commit"
 	git branch -M main
-	git push -u origin main
-	git log
+	git push -u
+	git log --oneline
 	cd ..
 	code $Text
 	cd $Text
@@ -84,17 +100,28 @@ function flt-bit {
 	git clone git@bitbucket.org:monzim/$Text.git
 	code $Text
 	cd $Text
-	git log
+	git log --oneline
 }
 
 #**********Flutter*******{
 #!/Create Flutter project in Flutter_App Directory and open it to VSCODE
-function flt-p {
+function flt-new {
     param(
       	[String] $Text
     )
     
 	cd "C:\Users\azraf\Codes\Flutter"
+    flutter create $Text
+	code $Text
+	cd $Text
+}
+
+function flt-new-test {
+    param(
+      	[String] $Text
+    )
+    
+	cd "C:\Users\azraf\Codes\Flutter\Test"
     flutter create $Text
 	code $Text
 	cd $Text
@@ -107,6 +134,4 @@ function social {
 	signal
 	Telegram
 	}
-	
-	
 	
